@@ -1,0 +1,95 @@
+.card {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .card-text {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .card-footer {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .card-footer a {
+    color: #6c757d;
+  }
+  
+  .card-footer a:hover {
+    color: #343a40;
+  }
+  
+  .input-group input[type="text"] {
+    border-radius: 0;
+  }
+  
+  .input-group-btn .btn-secondary {
+    border-radius: 0;
+  }
+  
+  .list-unstyled {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .list-unstyled li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .list-unstyled a {
+    color: #212529;
+    font-size: 1.1rem;
+  }
+  
+  .list-unstyled a:hover {
+    color: #007bff;
+  }
+  
+  .col-lg-6:last-of-type ul li:last-of-type {
+    margin-bottom: 0;
+  }
+  
+  .card-header {
+    font-size: 1.1rem;
+    background-color: #f7f7f7;
+    border-bottom: none;
+  }
+  
+  .card-header:last-of-type {
+    border-bottom: none;
+  }
+  
+  .card-header h5 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .my-4 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  

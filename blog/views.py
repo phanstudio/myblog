@@ -1,16 +1,25 @@
-from django.shortcuts import render,  redirect
+from django.shortcuts import render,  redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
 
 def post_list(request):
     posts = Post.objects.all()
-    # print(posts[0].body)
     return render(request, 'blog/post_list.html', {'posts': posts})
+
+
+def admin_post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'blog/admin_post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     post.body = post.body.split("\n")
     return render(request, 'blog/post_detail.html', {'post': post})
+
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('blog:post_list')
 
 def create_post(request):
     if request.method == 'POST':
