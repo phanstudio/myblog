@@ -6,10 +6,11 @@
 {% block content %}
     <ul>
         {% for post in posts %}
-        <h3>
-            <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
-        </h3>
-            by {{ post.author}}
+            <h3>
+                <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
+                by {{ post.author}}
+            </h3>
+            <p>{{ post.body|last_nchars:15 }}</p>
         
         {% empty %}
         <li>No posts yet.</li>
