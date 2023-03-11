@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% load custom_filters %}
+
+<h1>Blog Posts</h1>
+
+{% block content %}
+    <ul>
+        {% for post in posts %}
+        <h3>
+            <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
+        </h3>
+            by {{ post.author}}
+        
+        {% empty %}
+        <li>No posts yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+
