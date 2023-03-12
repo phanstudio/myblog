@@ -10,6 +10,7 @@ def Marking(value):
     count = cntr(value[:3])
     if count["#"]: return count["#"]
     if count["-"]: return 10+count["-"]
+    if count["$"]: return 20+count["$"]
 
 
 @register.filter
@@ -19,3 +20,7 @@ def first_nchars(value,n):
 @register.filter
 def last_nchars(value,n):
     return value[n:]
+
+@register.filter
+def title_case(value):
+    return value.title()

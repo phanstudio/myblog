@@ -3,3 +3,4 @@
 # python manage.py migrate
 # python manage.py makemigrations blog
 # python manage.py collectstatic
+# python manage.py startapp accounts

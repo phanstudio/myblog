@@ -10,7 +10,7 @@
       {% for post in posts %}
         <div class="card mb-4">
           <div class="card-body">
-            <h2 class="card-title">{{ post.title }}</h2>
+            <h2 class="card-title">{{ post.title|title_case }}</h2>
             <p class="card-text">{{ post.body|truncatewords:50 }}</p>
             <a href="{% url 'blog:post_detail' pk=post.pk %}" class="btn btn-primary">Read More &rarr;</a>
           </div>

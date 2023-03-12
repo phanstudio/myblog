@@ -1,6 +1,23 @@
 from django.shortcuts import render,  redirect, get_object_or_404
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm#, SignupForm
+from django.contrib.auth.views import LoginView
+# from django.contrib.auth.forms import UserCreationForm
+
+
+# def signup(request):
+#     if request.method == 'POST':
+#         form = SignupForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('home')
+#     else:
+#         form = SignupForm()
+#     return render(request, 'accounts/signup.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    template_name = 'blog/login.html'
+
 
 def post_list(request):
     posts = Post.objects.all()

@@ -1,0 +1,56 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-md-8 {
+    flex-basis: calc(66.666667% - 15px);
+    margin-right: 15px;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  h4 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  
+  .ml-4 {
+    margin-left: 1rem !important;
+  }
+  
+  footer {
+    border-top: 1px solid #ccc;
+    margin-top: 2rem;
+    padding-top: 1rem;
+  }
+  
+  footer h6 {
+    font-size: 1rem;
+    font-style: italic;
+    color: #999;
+    margin-top: 0.5rem;
+  }
+  
