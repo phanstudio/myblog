@@ -1,10 +1,81 @@
 {% extends 'blog/base.html' %}
+{% load custom_filters %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="text-center">Login</h2>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                {{ form.username.label_tag}}
+                <div class="c-bar">{{ form.username|add_class:"form-control"|attr:"style:width:300px;" }}</div>
+                
+              </div>
+              <div class="form-group">
+                {{ form.password.label_tag }}
+                <div class="c-bar">{{ form.password|add_class:"form-control"|attr:"style:width:300px;" }}</div>
+                
+              </div>
+              <div class="c-fp">
+                <a href="#" style="margin-left: auto;">Forgot Password?</a>
+              </div>
+              
+              <div class="c-arr">
+                By signing in, you agree to our Terms of Service and Privacy Policy, which we may update from time to time. 
+                We’ll occasionally send you account-related emails.
+              </div>
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </form>
+
+            <div class="card-footer">
+                --------------------------New to the blog?------------------------
+              <div class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+                  <a class="nav-link" href="{% url 'accounts:signup' %}" style="color: white;">SIGNUP</a>
+                </button>              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    .btn-primary{
+      width: 100%;
+    }
+    .c-arr{
+      margin-bottom: 10px;
+    }
+    .c-fp{
+      display: flex;
+      left: auto;
+    }
+    .nav-item{
+      justify-content: center;
+      display: flex;
+    }
+    .form-control{
+      height: 50px;
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    .form-group{
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+  </style>
+
 {% endblock %}
+
+

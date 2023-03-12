@@ -24,3 +24,22 @@ def last_nchars(value,n):
 @register.filter
 def title_case(value):
     return value.title()
+
+
+@register.filter(name='attr')
+def attr(value, arg):
+    attrs = {}
+    for pair in arg.split(';'):
+        try:
+            key, value = pair.split(':')
+            attrs[key] = value
+        except ValueError:
+            pass
+    return value.as_widget(attrs=attrs)
+
+@register.filter(name='add_class')
+def add_class(value, arg):
+    css_classes = value.field.widget.attrs.get('class', '').split()
+    css_classes.append(arg)
+    value.field.widget.attrs['class'] = ' '.join(css_classes)
+    return value
