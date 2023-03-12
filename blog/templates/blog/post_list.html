@@ -5,14 +5,20 @@
 
 
 {% block content %}
+  {% if is_admin %}
+    <div class="alert alert-success" role="alert">
+      You are logged in as an admin.
+    </div>
+  {% endif %}
   <div class="row">
     <div class="col-md-8">
       {% for post in posts %}
         <div class="card mb-4">
           <div class="card-body">
             <h2 class="card-title">{{ post.title|title_case }}</h2>
-            <p class="card-text">{{ post.body|truncatewords:50 }}</p>
+            <p class="card-text">{{ post.body|truncatewords:50|makelister|Maker }}</p>
             <a href="{% url 'blog:post_detail' pk=post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+            <a href="{% url 'blog:delete_post' pk=post.pk %}" class="btn btn-primary" style="background-color: red;border-color: red; float: right;">Delete</a>
           </div>
           <div class="card-footer text-muted">
             Posted on {{ post.created_date|date:"F d, Y" }} by {{ post.author|first_nchars:3 }}

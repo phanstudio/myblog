@@ -1,10 +1,41 @@
 {% extends 'blog/base.html' %}
+{% load custom_filters %}
 
 {% block content %}
-<h2>Sign up</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-</form>
+  <div class="container">
+    <h2 class="mt-5">Sign up</h2>
+    <hr>
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form method="POST">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username|add_class:"form-control"|attr:"style:width:100%;" }}
+            <small class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email|add_class:"form-control"|attr:"style:width:100%;" }}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password1|add_class:"form-control"|attr:"style:width:100%;" }}
+            <small class="form-text text-muted">Your password can't be too similar to your other personal information.<br>Your password must contain at least 8 characters.<br>Your password can't be a commonly used password.<br>Your password can't be entirely numeric.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">Password confirmation:</label>
+            {{ form.password2|add_class:"form-control"|attr:"style:width:100%;" }}
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block mt-3">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}

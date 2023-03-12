@@ -43,3 +43,23 @@ def add_class(value, arg):
     css_classes.append(arg)
     value.field.widget.attrs['class'] = ' '.join(css_classes)
     return value
+
+@register.filter
+def makelister(value):
+    return value.split("\n")
+
+@register.filter
+def Maker(value):
+    """Split a string into a list of paragraphs."""
+    l = ""
+
+    for v in value:
+        if "#" in v:
+            v = v.replace("#", "")
+        if "-" in v:
+            v = v.replace("-", "")
+        if "$" in v:
+            v = v.replace("$", "")
+        l+= v
+
+    return l

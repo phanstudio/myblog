@@ -1,6 +1,8 @@
 {% extends 'blog/base.html' %}
 {% load custom_filters %}
 
+
+
 {% block content %}
   <div class="container mt-5">
     <div class="row justify-content-center">
@@ -22,6 +24,11 @@
                 <div class="c-bar">{{ form.password|add_class:"form-control"|attr:"style:width:300px;" }}</div>
                 
               </div>
+
+              {% if form.errors %}
+                <p style="color: red;">Your username and password didn't match. Please try again.</p>
+              {% endif %}
+
               <div class="c-fp">
                 <a href="#" style="margin-left: auto;">Forgot Password?</a>
               </div>
