@@ -1,0 +1,25 @@
+<!-- create_category.html -->
+
+{% extends 'blog/base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+  <button class="btn btn-primary" style="float: right; margin-top: 10px;">
+    <a href="{% url 'create_category' %}" style="color: white;">Back</a>
+  </button>
+  <h1>Manage Categories</h1>
+  <hr>
+  Avalible Categories:
+  {% if form.errors %}
+      <p style="color: red;">{{ form.errors.as_text }}</p>
+    {% endif %}
+  {% for category in categories %}
+    <div style="margin-top: 5px;">
+        <label>{{ category.name }}:</label>
+        <button class="btn btn-primary" style="background-color: red;border-color: red;margin-left: 20px;">
+            <a href="{% url 'blog:delete_category' slug=category.slug %}" style="color: white;">Delete</a>
+        </button>
+    </div>
+    {% endfor %}
+    
+{% endblock %}

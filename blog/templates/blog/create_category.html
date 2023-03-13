@@ -1,0 +1,25 @@
+<!-- create_category.html -->
+
+{% extends 'blog/base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+  <button class="btn btn-primary" style="float: right; margin-top: 10px;">
+    <a href="{% url 'blog:manage_slugs' %}" style="color: white;">Manage</a>
+  </button>
+  <h1>Create a New Category</h1>
+  <hr>
+  Avalible Categories:
+    {% for category in categories %}
+    <label style="background-color: aqua; padding: 3px;border-radius: 3px;padding-top:0px;">{{ category.name|title_case }}</label>
+    {% endfor %}
+    <br>
+    {% if form.errors %}
+      <p style="color: red;">{{ form.errors.as_text }}</p>
+    {% endif %}
+  <form method="post">
+    {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+{% endblock %}

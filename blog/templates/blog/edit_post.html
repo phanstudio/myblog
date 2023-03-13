@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
   {% endblock %}
   <div class="container">
-    <h2>Create a new post</h2>
+    <h2>Edit post</h2>
     <hr>
     {% if form.errors %}
       <p style="color: red;">{{ form.errors.as_text }}</p>
@@ -15,12 +15,12 @@
     <form method="post">
       {% csrf_token %}
       <div class="form-group">
-        <label for="{{ form.title.id_for_label }}">Title:</label>
+        <label for="{{ form.title.id_for_label }}">Title</label>
         <div>{{ form.title }}</div>
       </div>
 
       <div class="form-group">
-        <label for="{{ form.content.id_for_label }}">Content:</label>
+        <label for="{{ form.content.id_for_label }}">Content</label>
         <div>{{ form.body|add_class:"form-control"|attr:"style:width:90%" }}</div>
       </div>
 
@@ -29,13 +29,8 @@
         {{ form.author }}
       </div>
 
-      <div class="form-group">
-        <label for="{{ form.categories.id_for_label }}">Categories:</label>
-        {{ form.categories }}
-      </div>
-    
-
       <button type="submit" class="btn btn-primary">Save</button>
+      <button class="btn btn-secondary">Back</button>
     </form>
   </div>
 

@@ -63,3 +63,8 @@ def Maker(value):
         l+= v
 
     return l
+
+@register.filter
+def catego(value):
+    """Split a string into a list of paragraphs."""
+    return [i["name"] for i in value.values()]

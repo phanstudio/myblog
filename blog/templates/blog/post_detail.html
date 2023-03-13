@@ -4,10 +4,13 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-12 ">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">{{ post.title|title_case }}</h2>
+                        <div class="card-TT">
+                            <h2 class="card-title">{{ post.title|title_case }}</h2>
+                            <p style="color: gray; font-size: 1.2rem;">Posted by {{post.author}}</p>
+                        </div>
                         <p class="card-text">
                             {% for paragraph in post.body %}
                                 {% with paragraph|Marking as para %}
@@ -42,10 +45,14 @@
             margin-top: 50px;
         }
 
+        .card-TT{
+            background-color: #f8f9fa;
+            padding: 1px;
+        }
+
         .card-title {
             font-size: 3.0rem;
             font-weight: bold;
-            background-color: #f8f9fa;
         }
 
         .card-footer {

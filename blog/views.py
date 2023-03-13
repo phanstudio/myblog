@@ -1,6 +1,6 @@
 from django.shortcuts import render,  redirect, get_object_or_404
-from .models import Post
-from .forms import PostForm
+from .models import Post, Category
+from .forms import PostForm, CreateCategoryForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.urls import reverse_lazy, reverse
@@ -9,6 +9,45 @@ from django.conf import settings
 from datetime import datetime as dt
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+
+def manage_slugs(request):
+    categories = Category.objects.all()
+    return render(request, 'blog/manage_slugs.html', {'categories': categories})
+
+def delete_category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    category.delete()
+    return redirect('category_list')
+
+def create_category(request):
+    if request.method == 'POST':
+        form = CreateCategoryForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            slug = form.cleaned_data['slug']
+            i = 0
+            while Category.objects.filter(slug=slug).exists():
+                i += 1
+                slug = f'{slug}-{i}'
+            category = Category.objects.create(name=name, slug=slug)
+            form = CreateCategoryForm()
+            return redirect('create_category')
+    else:
+        form = CreateCategoryForm()
+    categories = Category.objects.all()
+    return render(request, 'blog/create_category.html', {'form': form, 'categories': categories})
+
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            form.save_m2m()
+            return redirect('blog:post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/edit_post.html', {'form': form})
 
 @login_required
 def edit_user(request, user_id):
@@ -65,6 +104,7 @@ def post_list(request):
         'posts': posts,
         'is_admin': is_admin
     }
+    print(posts[0].categories.values()[0]["name"])
     return render(request, 'blog/post_list.html', context)
 
 class CustomLoginView(LoginView):
@@ -84,9 +124,12 @@ def delete_post(request, pk):
 
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST,request.FILES)
         if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
             post = form.save()
+            form.save_m2m()
             return redirect('blog:post_detail', pk=post.pk)
     else:
         form = PostForm()

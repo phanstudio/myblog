@@ -24,4 +24,5 @@ urlpatterns = [
     path('blog/', include(('blog.urls','blog'), namespace="blog")),
     path('accounts/', include(('accounts.urls', 'accounts'), namespace= "accounts")),
     path('manage/', views.manage_accounts, name='manage_users'),
+    path('create_category/', views.create_category, name='create_category'),
 ]

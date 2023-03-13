@@ -8,8 +8,8 @@
 
 # signing up doesnt really work #
 # add deleting accounts #
-# add categories
-# style create post
+# add categories #
+# style create post #
 # add admin rights #
 # create pop up if click on create post and not a user #
 # image issue
@@ -18,3 +18,6 @@
 # make delete optional #
 # single username  and email 
 # groups important #
+# edit posts #
+# search engine
+# filter
