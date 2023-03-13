@@ -104,7 +104,6 @@ def post_list(request):
         'posts': posts,
         'is_admin': is_admin
     }
-    print(posts[0].categories.values()[0]["name"])
     return render(request, 'blog/post_list.html', context)
 
 class CustomLoginView(LoginView):
