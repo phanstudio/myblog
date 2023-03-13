@@ -1,0 +1,68 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Edit User</h2>
+    <hr>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.password.id_for_label }}">Password:</label>
+        {{ form.password }}
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.is_superuser.id_for_label }}" class="form-label">Superuser Status:</label>
+        {{ form.is_superuser }}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.last_login.id_for_label }}">Last Login:</label>
+        {{ form.last_login }}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">Username:</label>
+        <div>{{ form.username }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        <div>{{ form.email }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.first_name.id_for_label }}">First name:</label>
+        <div>{{ form.first_name }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.last_name.id_for_label }}">Last name:</label>
+        <div>{{ form.last_name }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.is_staff.id_for_label }}" class="form-label">Staff Status:</label>
+        {{ form.is_staff }}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.is_active.id_for_label }}">Active:</label>
+        {{ form.is_active }}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.user_permissions.id_for_label }}" class="form-label">User Permissions:</label>
+        <div>{{ form.user_permissions }}</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.date_joined.id_for_label }}">Date Joined:</label>
+        {{ form.date_joined }}
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button class="btn btn-secondary"><a href="{% url 'manage_users' %}" style="color: white;">Back</a></button>
+    </form>
+  </div>
+{% endblock %}

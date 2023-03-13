@@ -2,13 +2,37 @@ from django.shortcuts import render,  redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
+from django.urls import reverse_lazy, reverse
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
-from django.utils import timezone
 from datetime import datetime as dt
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+
+@login_required
+def edit_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_users')
+    else:
+        form = UserChangeForm(instance=user)
+    return render(request, 'blog/edit_user.html', {'form': form})
+
+@user_passes_test(lambda u: u.is_superuser)
+def manage_accounts(request):
+    users = User.objects.all()
+    return render(request, 'blog/manage_accounts.html', {'users': users})
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def delete_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.delete()
+    return redirect(reverse('manage_users'))
 
 def logout_view(request):
     logout(request)
@@ -34,7 +58,6 @@ class SessionIdleTimeout:
         response = self.get_response(request)
         return response
 
-
 def post_list(request):
     posts = Post.objects.all()
     is_admin = request.user.is_staff or request.user.is_superuser
@@ -47,11 +70,6 @@ def post_list(request):
 class CustomLoginView(LoginView):
     template_name = 'blog/login.html'
     success_url = reverse_lazy('blog:post_list')
-
-
-# def post_list(request):
-#     posts = Post.objects.all()
-#     return render(request, 'blog/post_list.html', {'posts': posts})
 
 @login_required
 def post_detail(request, pk):
