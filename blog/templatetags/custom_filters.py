@@ -68,3 +68,20 @@ def Maker(value):
 def catego(value):
     """Split a string into a list of paragraphs."""
     return [i["name"] for i in value.values()]
+
+@register.filter
+def catego_split(r):
+    h = [[],[]]
+    for j in range(2):
+        for i in range(len(r)):
+            if i%2==j:
+                h[j].append(r[i])
+    # for i in range(len(r)):
+    #     if i%2==1:
+    #         h[1].append(r[i])
+    
+    if len(h[0]) > len(h[1]):
+        h[1].append(None)
+    else:
+        h[0].append(None)
+    return h

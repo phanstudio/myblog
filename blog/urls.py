@@ -13,6 +13,7 @@ urlpatterns = [
     path('accounts/delete_user/<int:user_id>/', delete_user, name='delete_user'),
     path('accounts/manage_users/edit/<int:user_id>/', views.edit_user, name='edit_user'),
     path('categories/<slug:slug>/delete/', delete_category, name='delete_category'),
-    path('categories/', views.manage_slugs, name= "manage_slugs")
+    path('categories/', views.manage_slugs, name= "manage_slugs"),
+    path('posts/<str:c_filter>/', views.post_list, name='filt_post_list'),
 
 ]

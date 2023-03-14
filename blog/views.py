@@ -1,6 +1,6 @@
 from django.shortcuts import render,  redirect, get_object_or_404
 from .models import Post, Category
-from .forms import PostForm, CreateCategoryForm
+from .forms import PostForm, CreateCategoryForm, PostSearchForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.urls import reverse_lazy, reverse
@@ -97,12 +97,21 @@ class SessionIdleTimeout:
         response = self.get_response(request)
         return response
 
-def post_list(request):
+def post_list(request, c_filter= ""):
     posts = Post.objects.all()
+    form = PostSearchForm(request.GET)
+    search_query = request.GET.get('search_query')
     is_admin = request.user.is_staff or request.user.is_superuser
+    categories = Category.objects.all()
+    if len(c_filter) !=0:
+        posts = posts.filter(categories__slug=c_filter)
+    if search_query:
+        posts = posts.filter(title__icontains=search_query)
     context = {
         'posts': posts,
-        'is_admin': is_admin
+        'is_admin': is_admin,
+        'categories': categories,
+        'form': form,
     }
     return render(request, 'blog/post_list.html', context)
 

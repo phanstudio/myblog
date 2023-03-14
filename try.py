@@ -14,10 +14,13 @@
 # create pop up if click on create post and not a user #
 # image issue
 # add check the post request or no posting for them #
-# optional style nav link #
+# optional style nav link # (opt until needed) 
 # make delete optional #
-# single username  and email 
+# single username  and email #
+# forget password
+# terms conditions # (opt until needed) 
+# pass word #
 # groups important #
 # edit posts #
-# search engine
-# filter
+# search engine #
+# filter #
