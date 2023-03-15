@@ -6,22 +6,36 @@
   {% block styles %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
   {% endblock %}
+  
   <div class="container">
-    <h2>Edit post</h2>
+    <h2>Edit Current Post</h2>
     <hr>
     {% if form.errors %}
       <p style="color: red;">{{ form.errors.as_text }}</p>
     {% endif %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
-        <label for="{{ form.title.id_for_label }}">Title</label>
+        <label for="{{ form.title.id_for_label }}">Title:</label>
         <div>{{ form.title }}</div>
       </div>
 
       <div class="form-group">
-        <label for="{{ form.content.id_for_label }}">Content</label>
+        <label for="{{ form.content.id_for_label }}">Content:</label>
         <div>{{ form.body|add_class:"form-control"|attr:"style:width:90%" }}</div>
+      </div>
+
+      To select more than one image use ctrl + click, re post your images
+      <div class="form-group">
+        <label for="id_images">Images:</label>
+        <input type="file" name="images" id="id_images" multiple>
+      </div>
+
+      <div style="width: 20%; margin-bottom: 10px;">
+        {% for image in post.image_set.all %}
+          <img src="{{ image.image.url }}" alt="{{ post.title }} image" style="max-width: 100%; display: block; padding: 1%; height:8rem; margin-left: auto; margin-right: auto;">
+          <a href="{% url 'blog:delete_image' pk=post.pk pl=image.image.url|Str_n:post.image_set.all  %}" class="btn btn-primary" style="background-color: red;border-color: red;width: 100%;margin-bottom: 5px;">Delete</a>
+        {% endfor %}
       </div>
 
       <div class="form-group">
@@ -29,8 +43,13 @@
         {{ form.author }}
       </div>
 
+      <div class="form-group">
+        <label for="{{ form.categories.id_for_label }}">Categories:</label>
+        {{ form.categories }}
+      </div>
+    
+
       <button type="submit" class="btn btn-primary">Save</button>
-      <button class="btn btn-secondary">Back</button>
     </form>
   </div>
 

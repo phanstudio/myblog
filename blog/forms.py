@@ -1,13 +1,14 @@
 from django import forms
-from .models import Post, Category, models
+from .models import Post, Category
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import AbstractUser, User
 
 class PostForm(forms.ModelForm):
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple)
+    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False,)
     class Meta:
         model = Post
-        fields = ['title','author','body', 'categories']
+        fields = ['title','author','body', 'categories','images']
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField()

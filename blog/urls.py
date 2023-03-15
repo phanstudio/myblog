@@ -15,5 +15,5 @@ urlpatterns = [
     path('categories/<slug:slug>/delete/', delete_category, name='delete_category'),
     path('categories/', views.manage_slugs, name= "manage_slugs"),
     path('posts/<str:c_filter>/', views.post_list, name='filt_post_list'),
-
+    path('<int:pk>/<int:pl>/delete_i/', views.delete_image, name='delete_image'),
 ]

@@ -12,16 +12,24 @@
       {% for post in posts %}
         <div class="card mb-4">
           <div class="card-body">
-            <h2 class="card-title">{{ post.title|title_case }}</h2>
-            <hr>
-            <p class="card-text">{{ post.body|truncatewords:50|makelister|Maker }}</p>
+            <nav class="row">
+              {% with post.image_set.all|img_list as image %}
+                  {% if image %}
+                    <img src="{{ image.image.url }}" alt="{{ post.title }} image" class= "view"style="max-width: 100%; display: block; padding: 2.5%; height:10rem; margin-top: auto;">
+                  {% endif %}
+                {% endwith %}
+              <div style="margin:2%; max-width: 100%;">
+                <h2 class="card-title" style="font-size: 2.0rem;">{{ post.title|title_case }}</h2>
+                <p class="card-text">{{ post.body|truncatewords:30|makelister|Maker }}</p>
+              </div>
+            </nav>
             <a href="{% url 'blog:post_detail' pk=post.pk %}" class="btn btn-primary">Read More &rarr;</a>
-              {% if user.is_staff or user.is_superuser %} 
-                <a href="{% url 'blog:delete_post' pk=post.pk %}" class="btn btn-primary" style="background-color: red;border-color: red; float: right;">Delete</a>
-                <div style="float: right;"> &nbsp &nbsp</div>
-                <a href="{% url 'blog:edit_post' pk=post.pk %}" class="btn btn-primary" style="float: right;">Edit</a> 
-              {% endif %}
-            </div>
+            {% if user.is_staff or user.is_superuser %} 
+              <a href="{% url 'blog:delete_post' pk=post.pk %}" class="btn btn-primary" style="background-color: red;border-color: red; float: right;">Delete</a>
+              <div style="float: right;"> &nbsp &nbsp</div>
+              <a href="{% url 'blog:edit_post' pk=post.pk %}" class="btn btn-primary" style="float: right;">Edit</a> 
+            {% endif %}
+          </div>
           <div class="card-footer text-muted">
             Posted on {{ post.created_date|date:"F d, Y" }} by {{ post.author }} | tags:
             {% for category in post.categories|catego  %}
@@ -82,4 +90,27 @@
     </div>
 
   </div>
+  <style>
+    /* For Mobile */
+    @media screen and (max-width: 540px) {
+        nav.row {
+          flex-wrap: wrap;
+        }
+    }
+
+    /* For Tablets */
+    @media screen and (min-width: 540px) and (max-width: 780px) {
+        nav.row {
+          flex-wrap: wrap;
+        }
+    }
+    @media screen and (min-width: 1000px) {
+      nav.row{
+        flex-wrap: nowrap;
+      }
+    }
+  </style>
+
+
+
 {% endblock content %}

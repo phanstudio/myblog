@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 from blog import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/blog/posts', permanent=False)),
@@ -25,4 +27,4 @@ urlpatterns = [
     path('accounts/', include(('accounts.urls', 'accounts'), namespace= "accounts")),
     path('manage/', views.manage_accounts, name='manage_users'),
     path('create_category/', views.create_category, name='create_category'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

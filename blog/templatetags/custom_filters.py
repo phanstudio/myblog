@@ -11,7 +11,7 @@ def Marking(value):
     if count["#"]: return count["#"]
     if count["-"]: return 10+count["-"]
     if count["$"]: return 20+count["$"]
-
+    if count["~"]: return 30+ int(value[1:3])
 
 @register.filter
 def first_nchars(value,n):
@@ -23,8 +23,7 @@ def last_nchars(value,n):
 
 @register.filter
 def title_case(value):
-    return value.title()
-
+    return str(value).title()
 
 @register.filter(name='attr')
 def attr(value, arg):
@@ -60,6 +59,8 @@ def Maker(value):
             v = v.replace("-", "")
         if "$" in v:
             v = v.replace("$", "")
+        if "~" in v:
+            v = v.replace("~", "")
         l+= v
 
     return l
@@ -85,3 +86,17 @@ def catego_split(r):
     else:
         h[0].append(None)
     return h
+
+@register.filter
+def img_list(value):
+    return value[0] if len(value) > 0 else False
+
+@register.filter
+def img_n(value, n):
+    return value[n-30]
+
+@register.filter
+def Str_n(value,n):
+    for t, l in enumerate(n):
+        if l.image.url == value:
+            return t

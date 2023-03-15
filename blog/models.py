@@ -27,7 +27,6 @@ class Post(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
     date_posted = models.DateTimeField(default=datetime.now)
     categories = models.ManyToManyField(Category)
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
