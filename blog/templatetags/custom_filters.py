@@ -1,6 +1,7 @@
 # custom_filters.py
 from collections import Counter as cntr
 from django import template
+import json
 
 register = template.Library()
 
@@ -46,6 +47,16 @@ def add_class(value, arg):
 @register.filter
 def makelister(value):
     return value.split("\n")
+
+@register.filter
+def mjson(value):
+    li = []
+    for i in list(value.values()):
+        ly = []
+        for k,j in i.items():
+            ly.append(str(k)+":"+str(j)+"/j")
+        li.append("".join(ly)+"/p")
+    return json.dumps(li)
 
 @register.filter
 def Maker(value):

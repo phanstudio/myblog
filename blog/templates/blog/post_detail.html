@@ -36,7 +36,7 @@
                                         <div class="cont-li">● {{ paragraph|last_nchars:1 }}</div>
                                     {% elif para > 30 %}
                                         {% with post.image_set.all|img_n:para as image %}
-                                            <img src="{{ image.image.url }}" alt="No image" style="max-width: 100%; display: block; padding: 2.5%; margin: auto;height: 25rem;">
+                                            <img src="{{ image.image.url }}" alt="No image" style="max-width: 100%; display: block; padding: 2.5%; margin: auto;height: 50%;">
                                         {% endwith %}
                                     {% endif %}
                                 {% endwith %}

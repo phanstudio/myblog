@@ -4,7 +4,9 @@
 # python manage.py makemigrations blog
 # python manage.py collectstatic
 # python manage.py startapp accounts
-# python manage.py shell   
+# python manage.py shell
+# django-admin startproject myblog
+# python manage.py startapp blog
 
 # signing up doesnt really work #
 # add deleting accounts #
@@ -28,5 +30,5 @@
 # resolution # (opt until needed)
 
 
-#clean_field, clean
+# clean_field, clean
 

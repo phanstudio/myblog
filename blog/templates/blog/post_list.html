@@ -15,7 +15,9 @@
             <nav class="row">
               {% with post.image_set.all|img_list as image %}
                   {% if image %}
-                    <img src="{{ image.image.url }}" alt="{{ post.title }} image" class= "view"style="max-width: 100%; display: block; padding: 2.5%; height:10rem; margin-top: auto;">
+                    <div style="width: 52%;padding-left: 2%;">
+                      <img src="{{ image.image.url }}" alt="{{ post.title }} image" class= "view"style="max-width: 100%; display: block; padding: 2.5%; height:10rem; margin-top: auto;">
+                    </div>
                   {% endif %}
                 {% endwith %}
               <div style="margin:2%; max-width: 100%;">
@@ -90,6 +92,40 @@
     </div>
 
   </div>
+  <script>
+    const createdDate = "{{ posts|mjson }}";
+    const jsonDecoded = createdDate.replace(/&quot;/g, ''); // replace HTML-encoded quotes
+    const wjson = jsonDecoded.replace(/&#x27;/g,' ').replace(/\[|]/g,"").replace(/\\r|\\n/g, '').replace(/{|}"/g,"")
+    let wsjArry1 = wjson.split("/p");
+    let arr = [];
+    for (let i = 0; i < wsjArry1.length-1; i++) {
+      let wsjArry = wsjArry1[i].split("/j"); // pop the empty string future matins
+      let arr1 = wsjArry.map((item, id)=> {
+        if(item !== ''){
+          if (id === 0) {
+            let str = item.replace(", ",'')
+            return str
+          }else{
+            return item
+          }
+        }
+      })
+
+      let arr2 = []
+      for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== undefined) {
+          arr2.push(arr1[i]);
+        }
+      }
+      arr.push(arr2)
+    }
+    console.log(arr)
+    fetch("{% url 'blog:post_list' %}").then((response)=>{
+      console.log(response.posts);
+    }).catch((error)=>{
+      console.log(error);
+    });
+  </script>
   <style>
     /* For Mobile */
     @media screen and (max-width: 540px) {
