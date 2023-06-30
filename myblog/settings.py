@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pst$jfup0pn39l9huhg@t_l7m*bi2r+bz+ue6p!a2efogpll#!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
