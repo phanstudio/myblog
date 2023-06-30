@@ -5,10 +5,11 @@ from django.contrib.auth.models import AbstractUser, User
 
 class PostForm(forms.ModelForm):
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple)
-    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False,)
+    # images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False,)
+    # images = forms.ImageField(widget=forms.FileInput(attrs={'multiple': True}), required=False)
     class Meta:
         model = Post
-        fields = ['title','author','body', 'categories','images']
+        fields = ['title','author','body', 'categories']
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField()
