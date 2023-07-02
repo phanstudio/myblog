@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from loader import imporT_
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,8 +27,8 @@ SECRET_KEY = 'django-insecure-pst$jfup0pn39l9huhg@t_l7m*bi2r+bz+ue6p!a2efogpll#!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["*"]
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 
 # Application definition
@@ -72,8 +73,8 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'myblog.wsgi.application'
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
+WSGI_APPLICATION = 'myblog.wsgi.application'
+# WSGI_APPLICATION = 'vercel_app.wsgi.app'
 LOGIN_URL = '/blog/login/'
 LOGIN_REDIRECT_URL = 'blog:post_list'
 
@@ -88,12 +89,12 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'URL': os.getenv('POSTGRES_URL'),
-        'NAME': os.getenv('PGNAME'),
-        'USER': os.getenv('PGUSER'),
-        'PASSWORD': os.getenv('PGPASSWORD'),
-        'HOST': os.getenv('PGHOST'),
-        'PORT': os.getenv('PGPORT'),
+        'URL': imporT_("PGDATABASE.txt"),
+        'NAME': imporT_('PGNAME'),
+        'USER': imporT_('PGUSER'),
+        'PASSWORD': imporT_('PGPASSWORD'),
+        'HOST': imporT_('PGHOST'),
+        'PORT': imporT_('PGPORT'),
     }
 }
 
