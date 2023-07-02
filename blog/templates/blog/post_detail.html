@@ -6,45 +6,29 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card">
-                    {% with post.image_set.all|img_list as image %}
-                        {% if image %}
-                            <img src="{{ image.image.url }}" alt="{{ post.title }} image" style="max-width: 100%; display: block; padding: 2.5%; margin: auto;">
-                        {% endif %}
-                    {% endwith %}
                     <div class="card-body">
                         <div class="card-TT">
-                            <h2 class="card-title">{{ post.title|title_case }}</h2>
-                            <p style="color: gray; font-size: 1.2rem;">
-                                Posted by {{post.author|title_case}} | Tags ►
-                                {% for category in post.categories|catego  %}
-                                    {{category|title_case}}
-                                {% endfor %}
+                            {% if post.cover_image %}
+                                <img src="{{ post.cover_image.url }}" alt="{{ post.title }} image" style="max-width: 95%; display: block; padding: 2.5%; margin: auto;">
+                            {% endif %}
+                            <h2 class="card-title" style="text-align: center; padding: 2.5%;">{{ post.title|title_case }}</h2>
+                            <hr style="width: 50px; border: 5px solid  #65C4B0; margin: 20px auto;" >
+                            <p style="color: gray; text-align: center;">
+                                Posted by {{post.author|title_case}} | {{ post.date_posted|date:"F d, Y" }}
                             </p>
                         </div>
                         <p class="card-text">
                             {% for paragraph in post.body %}
-                                {% with paragraph|Marking as para %}
-                                    {% if para == None %}
-                                        <div class="cont-d">
-                                            {{ paragraph }}
-                                        </div>
-                                    {% elif para == 1 %}
-                                        <h3>{{ paragraph|last_nchars:1|title_case  }}</h3>
-                                    {% elif para == 2 %}
-                                        <h4>{{ paragraph|last_nchars:2|title_case  }}</h4>
-                                    {% elif para == 11 %}
-                                        <div class="cont-li">● {{ paragraph|last_nchars:1 }}</div>
-                                    {% elif para > 30 %}
-                                        {% with post.image_set.all|img_n:para as image %}
-                                            <img src="{{ image.image.url }}" alt="No image" style="max-width: 100%; display: block; padding: 2.5%; margin: auto;height: 50%;">
-                                        {% endwith %}
-                                    {% endif %}
-                                {% endwith %}
+                                {{ paragraph|Marking }}
                             {% endfor %}
                         </p>
                         <div class="card-footer">
                             <small class="text-muted">
-                                Posted on: {{ post.date_posted|date:"F d, Y" }} by {{post.author|title_case}}
+                                Posted on: {{ post.date_posted|date:"F d, Y" }} by {{post.author|title_case}} 
+                                Tags ►
+                                {% for category in post.categories|catego  %}
+                                    {{category|title_case}},
+                                {% endfor %}
                             </small>
                         </div>
                     </div>
@@ -54,6 +38,14 @@
     </div>
 
     <style>
+        /* body {
+            background-image: url("/media/media/hi.jpg"); */
+            /* background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover; */
+            /* background-size: contain;
+            
+            } */
         /* Add your custom styles here */
         .card {
             margin-top: 50px;

@@ -31,4 +31,11 @@
 
 
 # clean_field, clean
-
+# from blog.models import Category 
+# products = Category.objects.values_list('slug', 'name')
+# for product in products:
+#     print(product)
+# products = Category.objects.values_list('slug', 'id') 
+# product = Category.objects.get(id=7) 
+# product.delete()
+# exit()

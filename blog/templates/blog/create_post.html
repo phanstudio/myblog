@@ -19,16 +19,16 @@
         <label for="{{ form.title.id_for_label }}">Title:</label>
         <div>{{ form.title }}</div>
       </div>
+      
+      Select a cover Image
+      <div class="form-group">
+        <label for="{{ form.cover_image.id_for_label }}">Cover Image:</label>
+        {{ form.cover_image }}
+      </div>
 
       <div class="form-group">
         <label for="{{ form.content.id_for_label }}">Content:</label>
         <div>{{ form.body|add_class:"form-control"|attr:"style:width:90%" }}</div>
-      </div>
-
-      To select more than one image use ctrl + click
-      <div class="form-group">
-        <label for="id_images">Images:</label>
-        <input type="file" name="images" id="id_images" multiple>
       </div>
 
       <div class="form-group">

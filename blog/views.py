@@ -20,14 +20,14 @@ def manage_slugs(request):
 def delete_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     category.delete()
-    return redirect('category_list')
+    return redirect('blog:manage_slugs')
 
 def create_category(request):
     if request.method == 'POST':
         form = CreateCategoryForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            slug = form.cleaned_data['slug']
+            slug = form.cleaned_data['name'].replace(" ", "")#form.cleaned_data['slug']
             i = 0
             while Category.objects.filter(slug=slug).exists():
                 i += 1
@@ -122,12 +122,12 @@ def post_detail(request, pk):
 @user_passes_test(lambda u: u.is_superuser)
 def delete_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    for image in post.image_set.all():
+    # for image in post.image_set.all():
         # delete the physical image file from the file system
-        if os.path.isfile(image.image.path):
-            os.remove(image.image.path)
-        # delete the Image object from the database
-        image.delete()
+    if os.path.isfile(post.cover_image.path):
+        os.remove(post.cover_image.path)
+    #     # delete the Image object from the database
+    #     image.delete()
     post.delete()
     return redirect('blog:post_list')
 
@@ -154,9 +154,9 @@ def edit_post(request, pk):
             post.save()
             form.save_m2m()
 
-            if 'images' in request.FILES:
-                for image in request.FILES.getlist('images'):
-                    Image.objects.create(post=post, image=image)
+            # if 'images' in request.FILES:
+            #     for image in request.FILES.getlist('images'):
+            #         Image.objects.create(post=post, image=image)
             return redirect('blog:post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
@@ -173,10 +173,10 @@ def create_post(request):
             post.save()
             form.save_m2m()
 
-            # Save the images
-            if 'images' in request.FILES:
-                for image in request.FILES.getlist('images'):
-                    Image.objects.create(post=post, image=image)
+            # # Save the images
+            # if 'images' in request.FILES:
+            #     for image in request.FILES.getlist('images'):
+            #         Image.objects.create(post=post, image=image)
 
             return redirect('blog:post_detail', pk=post.pk)
     else:

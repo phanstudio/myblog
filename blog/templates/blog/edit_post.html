@@ -25,17 +25,9 @@
         <div>{{ form.body|add_class:"form-control"|attr:"style:width:90%" }}</div>
       </div>
 
-      To select more than one image use ctrl + click, re post your images
       <div class="form-group">
-        <label for="id_images">Images:</label>
-        <input type="file" name="images" id="id_images" multiple>
-      </div>
-
-      <div style="width: 20%; margin-bottom: 10px;">
-        {% for image in post.image_set.all %}
-          <img src="{{ image.image.url }}" alt="{{ post.title }} image" style="max-width: 100%; display: block; padding: 1%; height:8rem; margin-left: auto; margin-right: auto;">
-          <a href="{% url 'blog:delete_image' pk=post.pk pl=image.image.url|Str_n:post.image_set.all  %}" class="btn btn-primary" style="background-color: red;border-color: red;width: 100%;margin-bottom: 5px;">Delete</a>
-        {% endfor %}
+        <label for="{{ form.cover_image.id_for_label }}">Cover Image:</label>
+        <div>{{ form.cover_image }}</div>
       </div>
 
       <div class="form-group">

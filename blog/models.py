@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, max_length=255)
+    slug = models.SlugField(unique=True, max_length=255, blank= True)
 
     class Meta:
         verbose_name_plural = "categories"
@@ -27,6 +27,7 @@ class Post(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
     date_posted = models.DateTimeField(default=datetime.now)
     categories = models.ManyToManyField(Category)
+    cover_image = models.ImageField(upload_to='media/',blank= True)
 
     def __str__(self):
         return self.title

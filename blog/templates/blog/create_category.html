@@ -19,7 +19,10 @@
     {% endif %}
   <form method="post">
     {% csrf_token %}
-        {{ form.as_p }}
+      <div class="form-group">
+        <label for="{{ form.author.id_for_label }}">Name:</label>
+        {{ form.name }}
+      </div>
     <button type="submit" class="btn btn-primary">Create</button>
   </form>
 {% endblock %}

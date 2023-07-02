@@ -2,17 +2,20 @@
 from collections import Counter as cntr
 from django import template
 import json
+import markdown2 as mk
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
 @register.filter
 def Marking(value):
     """Split a string into a list of paragraphs."""
-    count = cntr(value[:3])
-    if count["#"]: return count["#"]
-    if count["-"]: return 10+count["-"]
-    if count["$"]: return 20+count["$"]
-    if count["~"]: return 30+ int(value[1:3])
+    # count = cntr(value[:3])
+    # if count["#"]: return count["#"]
+    # if count["-"]: return 10+count["-"]
+    # if count["$"]: return 20+count["$"]
+    # if count["~"]: return 30+ int(value[1:3])
+    return mark_safe(mk.markdown(value))
 
 @register.filter
 def first_nchars(value,n):
@@ -43,6 +46,15 @@ def add_class(value, arg):
     css_classes.append(arg)
     value.field.widget.attrs['class'] = ' '.join(css_classes)
     return value
+
+def repl(v):
+    return v.replace("#", "").replace("$", "").replace("-", "").replace("\n", "")
+
+@register.filter
+def makeword(value, n):
+    value = repl(value)
+    print(value[:n],"\n")
+    return value[:n]+"..."
 
 @register.filter
 def makelister(value):
