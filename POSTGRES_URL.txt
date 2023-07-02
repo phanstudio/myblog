@@ -1,0 +1,1 @@
+postgresql://postgres:hszFpZKKS1rZ4aaAmnTm@containers-us-west-136.railway.app:7216/railway
