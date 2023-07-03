@@ -1,6 +1,6 @@
 {
     "builds": [{
-        "src": "/myblog/wsgi.py",
+        "src": "myblog/wsgi.py",
         "use": "@ardnt/vercel-python-wsgi",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }],
