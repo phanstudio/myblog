@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from loader import imporT_
+# from .loader import imporT_
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,19 +83,19 @@ LOGIN_REDIRECT_URL = 'blog:post_list'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': imporT_("PGDATABASE.txt"),
-        'NAME': imporT_('PGNAME'),
-        'USER': imporT_('PGUSER'),
-        'PASSWORD': imporT_('PGPASSWORD'),
-        'HOST': imporT_('PGHOST'),
-        'PORT': imporT_('PGPORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'URL': imporT_("PGDATABASE.txt"),
+    #     'NAME': imporT_('PGNAME'),
+    #     'USER': imporT_('PGUSER'),
+    #     'PASSWORD': imporT_('PGPASSWORD'),
+    #     'HOST': imporT_('PGHOST'),
+    #     'PORT': imporT_('PGPORT'),
+    # }
 }
 
 
