@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-pst$jfup0pn39l9huhg@t_l7m*bi2r+bz+ue6p!a2efogpll#!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["*"]
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 
 # Application definition
@@ -72,8 +72,8 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'myblog.wsgi.application'
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
+WSGI_APPLICATION = 'myblog.wsgi.application'
+# WSGI_APPLICATION = 'vercel_app.wsgi.app'
 LOGIN_URL = '/blog/login/'
 LOGIN_REDIRECT_URL = 'blog:post_list'
 
@@ -82,19 +82,19 @@ LOGIN_REDIRECT_URL = 'blog:post_list'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': os.getenv('POSTGRES_URL'),
-        'NAME': os.getenv('PGNAME'),
-        'USER': os.getenv('PGUSER'),
-        'PASSWORD': os.getenv('PGPASSWORD'),
-        'HOST': os.getenv('PGHOST'),
-        'PORT': os.getenv('PGPORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'URL': os.getenv('POSTGRES_URL'),
+    #     'NAME': os.getenv('PGNAME'),
+    #     'USER': os.getenv('PGUSER'),
+    #     'PASSWORD': os.getenv('PGPASSWORD'),
+    #     'HOST': os.getenv('PGHOST'),
+    #     'PORT': os.getenv('PGPORT'),
+    # }
 }
 
 
