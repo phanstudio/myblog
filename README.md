@@ -26,12 +26,12 @@ Follow these steps to set up the Django Blog Website locally:
 
 1. **Clone the Repository:**
    ```
-   git clone https://github.com/your-username/django-blog.git
+   git clone https://github.com/phanstudio/myblog.git
    ```
 
 2. **Navigate to the Project Directory:**
    ```
-   cd django-blog
+   cd myblog
    ```
 
 3. **Create a Virtual Environment:**
