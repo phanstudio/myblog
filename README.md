@@ -1,6 +1,6 @@
 # Django Blog Website
 
-Welcome to the Django Blog Website! This web application is built using the Django web framework and is designed to provide a platform for creating and managing blog posts. Whether you're a seasoned blogger or just getting started, this website makes it easy to publish and share your thoughts with the world.
+Welcome to the Django Blog Website! This web application is built using the Django web framework and is designed to provide a platform for creating and managing blog posts. Whether you're a seasoned blogger or just getting started, this website makes it easy to publish and share your thoughts with the world. The first.
 
 ## Table of Contents
 
